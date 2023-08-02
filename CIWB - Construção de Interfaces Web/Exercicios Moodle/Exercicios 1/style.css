@@ -1,0 +1,19 @@
+html{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    height: 99%;
+    width: 99%;
+
+    color: aliceblue;
+    width: 99%;
+    height: 99%;
+    display: grid;
+    place-items: center;
+    font-size: 40px;
+    background-color: dimgray;
+    font-family: sans-serif;
+}
+
