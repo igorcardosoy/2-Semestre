@@ -1,0 +1,16 @@
+html{
+    height: 95svh;
+    width: 95svw;
+}
+
+body{
+    height: 100%;
+    width: 100%;
+    color: aliceblue;
+    display: grid;
+    place-items: center;
+    font-size: 40px;
+    background-color: dimgray;
+    font-family: sans-serif;
+}
+
