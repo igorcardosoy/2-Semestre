@@ -1,3 +1,13 @@
+/*
+
+Ordenação por inserção
+
+- O método de ordenação por Inserção Direta é o mais rápido entre os outros métodos considerados básicos — Bubblesort e Seleção.
+
+- A principal característica deste método consiste em ordenarmos o arquivo utilizando um "sub-arquivo" ordenado localizado em seu inicio, e a cada novo passo, acrescentamos a este "sub-arquivo" mais um elemento, até que atingimos o último elemento do arquivo fazendo assim com que ele se torne ordenado.
+
+*/
+
 #include <stdio.h>
 #include <time.h>
 #define SIZE 100

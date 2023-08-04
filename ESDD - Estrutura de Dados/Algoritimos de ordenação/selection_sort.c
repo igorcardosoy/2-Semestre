@@ -1,3 +1,14 @@
+/*
+
+Ordenação por seleção
+
+O método de ORDENAÇÃO POR SELEÇÃO é considerado um dos mais simples e constitui-se na execução dos passos:
+- Selecionar a menor chave do arquivo;
+- Troque-a com o que está na primeira posição;
+- Repita as operações anteriores para os demais elementos,até que reste apenas um.
+
+*/
+
 #include <stdio.h>
 #include <time.h>
 #define SIZE 100

@@ -1,4 +1,17 @@
 //Dificil.
+
+/*
+
+Ordenação por intercalação
+
+- O Mergesort consiste em dividir o arquivo pela metade do tamanho original por meio de procedimento recursivo. Essa divisão ocorre até que o arquivo fique com apenas um elemento e estes sejam ordenados e intercalados.
+
+- Neste algoritmo é aplicada a técnica da divisão e conquista, envolvendo:
+    - Dividir o problema em um certo número de subproblemas;
+    - Conquistar os subproblemas solucionando-os recursivamente. Se os tamanhos dos subproblemas são suficientemente pequenos, então, solucionar os subproblemas de forma simples;
+    - Combinar as soluções dos subproblemas na solução do problema original.
+
+*/
 #include <stdio.h>
 #include <time.h>
 #define SIZE 100

@@ -1,3 +1,12 @@
+/*
+
+Ordenação por troca
+
+- Esse método consiste em comparar pares consecutivos de valores e permutá-los caso esteja fora de ordem.
+- O algoritmo determina uma sequencia de comparações sistemáticas que varrem o arquivo como um todo, fazendo com que a maior chave (ou menor) acabe no final do arquivo.
+
+*/
+
 #include <stdio.h>
 #include <time.h>
 #define SIZE 100
