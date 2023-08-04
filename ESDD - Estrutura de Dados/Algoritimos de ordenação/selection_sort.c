@@ -11,7 +11,7 @@ O método de ORDENAÇÃO POR SELEÇÃO é considerado um dos mais simples e cons
 
 #include <stdio.h>
 #include <time.h>
-#define SIZE 100
+#define SIZE 10000
 #define TRUE 1
 #define FALSE 0
 
@@ -59,10 +59,10 @@ void selection_sort(int dataset[])
     int smaller, aux;
     int search, i;
 
-    for (i = 0; i < (SIZE - 1); i++)
+    for (i = 0; i < SIZE; i++)
     {
         smaller = i;
-        for (search = i; search < SIZE; search++)
+        for (search = i + 1; search < SIZE; search++)
         {
             if (dataset[search] < dataset[smaller])
             {

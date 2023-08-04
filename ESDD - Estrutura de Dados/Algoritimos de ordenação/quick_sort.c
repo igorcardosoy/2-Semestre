@@ -18,7 +18,7 @@ Suponha que os elementos de x sejam particionados de modo que a seja colocado na
 
 #include <stdio.h>
 #include <time.h>
-#define SIZE 100
+#define SIZE 10000
 
 void quick_sort(int dataset[], int inicio, int fim);
 int particionar(int dataset[], int inicio, int fim);

@@ -14,7 +14,7 @@ Ordenação por intercalação
 */
 #include <stdio.h>
 #include <time.h>
-#define SIZE 100
+#define SIZE 100000
 
 void merge_sort(int dataset[], int esquerda, int direita);
 void merge(int dataset[], int l, int m, int r);
@@ -53,7 +53,7 @@ void random_number(int dataset[])
 
     for (i = 0; i < SIZE; i++)
     {
-        dataset[i] = rand() % 1001;
+        dataset[i] = rand();
     }
 }
 void merge_sort(int dataset[], int inicio, int fim)

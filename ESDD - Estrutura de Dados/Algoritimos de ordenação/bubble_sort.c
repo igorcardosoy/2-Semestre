@@ -9,7 +9,7 @@ Ordenação por troca
 
 #include <stdio.h>
 #include <time.h>
-#define SIZE 100
+#define SIZE 10000
 #define TRUE 1
 #define FALSE 0
 
@@ -61,7 +61,7 @@ void bubble_sort(int dataset[])
     {
 
         swap = FALSE;
-        for (j = 0; j < (SIZE - 1); j++)
+        for (j = 0; j < (SIZE - (1 + i)); j++)
         {
             if (dataset[j] > dataset[j + 1])
             {
