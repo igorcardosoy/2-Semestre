@@ -10,6 +10,7 @@ Ordenação por inserção
 
 #include <stdio.h>
 #include <time.h>
+#include <stdlib.h>
 #define SIZE 10000
 #define TRUE 1
 #define FALSE 0

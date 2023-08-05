@@ -11,6 +11,7 @@ O método de ORDENAÇÃO POR SELEÇÃO é considerado um dos mais simples e cons
 
 #include <stdio.h>
 #include <time.h>
+#include <stdlib.h>
 #define SIZE 10000
 #define TRUE 1
 #define FALSE 0

@@ -18,7 +18,8 @@ Suponha que os elementos de x sejam particionados de modo que a seja colocado na
 
 #include <stdio.h>
 #include <time.h>
-#define SIZE 10000
+#include <stdlib.h>
+#define SIZE 1000
 
 void quick_sort(int dataset[], int inicio, int fim);
 int particionar(int dataset[], int inicio, int fim);
@@ -57,7 +58,7 @@ void random_number(int dataset[])
 
     for (i = 0; i < SIZE; i++)
     {
-        dataset[i] = rand() % 1001;
+        dataset[i] = rand();
     }
 }
 void quick_sort(int dataset[], int inicio, int fim)

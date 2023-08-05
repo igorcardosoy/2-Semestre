@@ -14,7 +14,8 @@ Ordenação por intercalação
 */
 #include <stdio.h>
 #include <time.h>
-#define SIZE 100000
+#include <stdlib.h>
+#define SIZE 10000
 
 void merge_sort(int dataset[], int esquerda, int direita);
 void merge(int dataset[], int l, int m, int r);
@@ -71,55 +72,55 @@ void merge_sort(int dataset[], int inicio, int fim)
 }
 void merge(int dataset[], int inicio, int meio, int fim)
 {
-    int i, j, count;
+    int count_left, count_right, count;
 
     int size_left = meio - inicio + 1;
     int size_right = fim - meio;
 
     //Arrays temporarios
-    int esquerda[size_left], direita[size_right];
+    int left[size_left], right[size_right];
 
     //Copia os dados do array principal para os temporarios, como pilhas de papeis se separando
-    for (i = 0; i < size_left; i++)
+    for (count_left = 0; count_left < size_left; count_left++)
     {
-        esquerda[i] = dataset[inicio + i];
+        left[count_left] = dataset[inicio + count_left];
     }
-    for (j = 0; j < size_right; j++)
+    for (count_right = 0; count_right < size_right; count_right++)
     {
-        direita[j] = dataset[meio + 1 + j];
+        right[count_right] = dataset[meio + 1 + count_right];
     }
 
     // Juntar (merge) os arrays temporarios no principal.
-    i = 0;
-    j = 0;
+    count_left = 0;
+    count_right = 0;
     count = inicio;
     
-    while (i < size_left && j < size_right)
+    while (count_left < size_left && count_right < size_right)
     {
-        if (esquerda[i] <= direita[j])
+        if (left[count_left] <= right[count_right])
         {
-            dataset[count] = esquerda[i];
-            i++;
+            dataset[count] = left[count_left];
+            count_left++;
         }
         else
         {
-            dataset[count] = direita[j];
-            j++;
+            dataset[count] = right[count_right];
+            count_right++;
         }
         count++;
     }
 
-    while (i < size_left)
+    while (count_left < size_left)
     {
-        dataset[count] = esquerda[i];
-        i++;
+        dataset[count] = left[count_left];
+        count_left++;
         count++;
     }
 
-    while (j < size_right)
+    while (count_right < size_right)
     {
-        dataset[count] = direita[j];
-        j++;
+        dataset[count] = right[count_right];
+        count_right++;
         count++;
     }
 }
