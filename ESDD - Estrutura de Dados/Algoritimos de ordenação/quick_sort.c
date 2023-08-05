@@ -19,7 +19,7 @@ Suponha que os elementos de x sejam particionados de modo que a seja colocado na
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-#define SIZE 1000
+#define SIZE 100
 
 void quick_sort(int dataset[], int inicio, int fim);
 int particionar(int dataset[], int inicio, int fim);
@@ -74,25 +74,30 @@ void quick_sort(int dataset[], int inicio, int fim)
 }
 int particionar(int dataset[], int inicio, int fim)
 {
-    int i, j, aux;
+    int left, right, aux;
+
+    // Pivo recebe o numero no final do array
     int pivo = dataset[fim];
 
-    i = inicio;
-    for (j = inicio; j < fim; j++)
-    {
-        if (dataset[j] <= pivo)
-        {
-            aux = dataset[j];
-            dataset[j] = dataset[i];
-            dataset[i] = aux;
+    // i recebe a posição inicial.
+    left = inicio;
 
-            i++;
+
+    for (right = inicio; right < fim; right++)
+    {
+        if (dataset[right] <= pivo)
+        {
+            aux = dataset[right];
+            dataset[right] = dataset[left];
+            dataset[left] = aux;
+
+            left++;
         }
     }
 
-    aux = dataset[i];
-    dataset[i] = dataset[fim];
+    aux = dataset[left];
+    dataset[left] = dataset[fim];
     dataset[fim] = aux;
 
-    return i;
+    return left;
 }
