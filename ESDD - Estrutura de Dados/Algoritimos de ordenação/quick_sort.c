@@ -76,28 +76,33 @@ int particionar(int dataset[], int inicio, int fim)
 {
     int left, right, aux;
 
-    // Pivo recebe o numero no final do array
+    // Define o pivô como o último elemento
     int pivo = dataset[fim];
 
-    // i recebe a posição inicial.
+    // Inicializa o índice para a posição inicial
     left = inicio;
 
-
+    // Percorre o array
     for (right = inicio; right < fim; right++)
     {
+        // Se o elemento atual da parte direita do array, de acordo com o pivo, é menor ou igual ao pivô
         if (dataset[right] <= pivo)
         {
+            // Troca os elementos de posição
             aux = dataset[right];
             dataset[right] = dataset[left];
             dataset[left] = aux;
 
+            // Move o índice da posição onde os elementos menores ficam
             left++;
         }
     }
 
+    // Coloca o pivô na posição correta
     aux = dataset[left];
     dataset[left] = dataset[fim];
     dataset[fim] = aux;
 
+    // Retorna a nova posição do pivô
     return left;
 }
