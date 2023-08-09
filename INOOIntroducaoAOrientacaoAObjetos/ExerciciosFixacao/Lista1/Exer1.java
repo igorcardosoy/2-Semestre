@@ -1,5 +1,3 @@
-package lista_1;
-
 //Tabuada do numero 3
 
 public class Exer1 {
