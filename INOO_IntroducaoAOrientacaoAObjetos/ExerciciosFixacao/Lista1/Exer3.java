@@ -12,7 +12,7 @@ public class Exer3 {
 
         media = soma / 10;
         
-        System.out.printf("Média: %.2lf\n", media);
+        System.out.printf("Média: %.2f\n", media);
 
         input.close();
     }
