@@ -37,6 +37,7 @@ int main()
     return 0;
 }
 
+// Mostra o array
 void show(int dataset[])
 {
     int i;
@@ -46,6 +47,8 @@ void show(int dataset[])
         printf("Posicao [%d]: %d \n", i + 1, dataset[i]);
     }
 }
+
+// Coloca numeros aleatórios no Array
 void random_number(int dataset[])
 {
     int i;
@@ -55,22 +58,33 @@ void random_number(int dataset[])
         dataset[i] = rand() % 1001;
     }
 }
+
+//Metodo de ordenação
 void selection_sort(int dataset[])
 {
     int smaller, aux;
     int search, i;
 
+    //Percorre todo o vetor.
     for (i = 0; i < SIZE; i++)
     {
+
+        // Menor é definido como a posição i
         smaller = i;
+
+        //Percorre o vetor procurando alguem menor que o smaller. 
+        //search começa um numero a frente do menor.
         for (search = i + 1; search < SIZE; search++)
         {
+
+            //Se achar alguém menor, ele troca o posição menor pela posição encontrada como menor.
             if (dataset[search] < dataset[smaller])
             {
                 smaller = search;
             }
         }
 
+        //Troca a posição i, que era a menor, pela a verdadeira menor.
         aux = dataset[i];
         dataset[i] = dataset[smaller];
         dataset[smaller] = aux;

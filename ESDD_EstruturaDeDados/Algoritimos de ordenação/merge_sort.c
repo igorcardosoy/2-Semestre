@@ -39,6 +39,7 @@ int main()
     return 0;
 }
 
+// Mostra o array
 void show(int dataset[])
 {
     int i;
@@ -48,15 +49,19 @@ void show(int dataset[])
         printf("Posicao [%d]: %d \n", i + 1, dataset[i]);
     }
 }
+
+// Coloca numeros aleatórios no Array
 void random_number(int dataset[])
 {
     int i;
 
     for (i = 0; i < SIZE; i++)
     {
-        dataset[i] = rand();
+        dataset[i] = rand() % 1001;
     }
 }
+
+//Metodo de ordenação recursiva
 void merge_sort(int dataset[], int inicio, int fim)
 {
     if (inicio < fim)
@@ -64,12 +69,18 @@ void merge_sort(int dataset[], int inicio, int fim)
         // Encontrar o elemento do meio
         int meio = inicio + (fim - inicio) / 2;
 
+        // Metade vai para a recursividade, para chegar em problemas triviasis
         merge_sort(dataset, inicio, meio);
+
+        // A outra metade vai para a recursividade, para chegar em problemas triviasis
         merge_sort(dataset, (meio + 1), fim);
 
+        // Cada parte da recursividade, vai se juntando.
         merge(dataset, inicio, meio, fim);
     }
 }
+
+// Juntar os arrays.
 void merge(int dataset[], int inicio, int meio, int fim)
 {
     int count_left, count_right, count;
@@ -81,10 +92,14 @@ void merge(int dataset[], int inicio, int meio, int fim)
     int left[size_left], right[size_right];
 
     //Copia os dados do array principal para os temporarios, como pilhas de papeis se separando
+
+    // lado esquerdo é separado.
     for (count_left = 0; count_left < size_left; count_left++)
     {
         left[count_left] = dataset[inicio + count_left];
     }
+
+    //Lado da direita é separado.
     for (count_right = 0; count_right < size_right; count_right++)
     {
         right[count_right] = dataset[meio + 1 + count_right];
@@ -95,14 +110,17 @@ void merge(int dataset[], int inicio, int meio, int fim)
     count_right = 0;
     count = inicio;
     
+    // Enquanto a contagem da esquerda for menor que o tamanho do vetor, ele continua. Mesma coisa para o lado direito.
     while (count_left < size_left && count_right < size_right)
     {
+        //Se o lado esquedo for menor, o valor da esquerda é colocado no vetor original, na posição Inicio.
         if (left[count_left] <= right[count_right])
         {
             dataset[count] = left[count_left];
             count_left++;
         }
-        else
+        // Se o lado direito for menor, o valor da direita é colocado no vetor original, na posição Inici
+        else 
         {
             dataset[count] = right[count_right];
             count_right++;
@@ -110,6 +128,7 @@ void merge(int dataset[], int inicio, int meio, int fim)
         count++;
     }
 
+    //Caso ainda tenha numeros no array esquerdo, ele coloca no array.
     while (count_left < size_left)
     {
         dataset[count] = left[count_left];
@@ -117,6 +136,7 @@ void merge(int dataset[], int inicio, int meio, int fim)
         count++;
     }
 
+    //Caso ainda tenha numeros no array direito, ele coloca no array.
     while (count_right < size_right)
     {
         dataset[count] = right[count_right];

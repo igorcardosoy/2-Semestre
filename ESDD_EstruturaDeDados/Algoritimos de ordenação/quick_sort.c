@@ -43,6 +43,7 @@ int main()
     return 0;
 }
 
+// Mostra o array
 void show(int dataset[])
 {
     int i;
@@ -52,15 +53,19 @@ void show(int dataset[])
         printf("Posicao [%d]: %d \n", i + 1, dataset[i]);
     }
 }
+
+// Coloca numeros aleatórios no Array
 void random_number(int dataset[])
 {
     int i;
 
     for (i = 0; i < SIZE; i++)
     {
-        dataset[i] = rand();
+        dataset[i] = rand() % 1001;
     }
 }
+
+//Metodo de ordenação recursiva
 void quick_sort(int dataset[], int inicio, int fim)
 {
     int pivo;
@@ -72,6 +77,8 @@ void quick_sort(int dataset[], int inicio, int fim)
         quick_sort(dataset, (pivo + 1), fim);
     }
 }
+
+// Particionar o array
 int particionar(int dataset[], int inicio, int fim)
 {
     int left, right, aux;
