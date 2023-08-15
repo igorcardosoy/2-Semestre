@@ -19,16 +19,18 @@ Suponha que os elementos de x sejam particionados de modo que a seja colocado na
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-#define SIZE 100
+#define SIZE 1000000
 
 void quick_sort(int dataset[], int inicio, int fim);
 int particionar(int dataset[], int inicio, int fim);
 void show(int dataset[]);
 void random_number(int dataset[]);
 
+int array[SIZE];
+
 int main()
 {
-    int array[SIZE];
+    
     srand((unsigned)time(NULL));
 
     // Colocar numeros aleatórios no Array
