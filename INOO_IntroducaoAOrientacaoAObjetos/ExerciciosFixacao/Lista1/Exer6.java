@@ -21,6 +21,7 @@ public class Exer6 {
              System.out.printf("\n");
         }
 
+
         input.close();
     }
 }
