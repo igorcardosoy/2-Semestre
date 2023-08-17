@@ -29,6 +29,7 @@ void carrega_vetor_aleatorio(int colecao[], int tamanho, int qtd_digitos);
 void carrega_vetor_ordenado(int colecao[], int valor_inicial, int tamanho);
 void carrega_vetor_pior_caso(int colecao[], int tamanho);
 void imprime_vetor(int colecao[], int tamanho);
+void quickSort(int arr[], int left, int right, double trocas[], double comparacoes[]);
 
 // Para fazer funcionar com 1M, aparentemente tem que ser utilizado variaveis globais.
 int array[TAM], array1[TAM];
@@ -43,10 +44,10 @@ int main()
     // int array_pior[TAM];
 
     // Outra forma de declarar os arrays para funcionar é alocando memoria usando a função malloc.
-    // int *array =(int*) malloc(sizeof(int)*1000000; 
-    // int *array1 =(int*) malloc(sizeof(int)*1000000;
-    // int *array_org =(int*) malloc(sizeof(int)*1000000;
-    // int *array_pior =(int*) malloc(sizeof(int)*1000000;
+    // int *array =(int*) malloc(sizeof(int)*1000000); 
+    // int *array1 =(int*) malloc(sizeof(int)*1000000);
+    // int *array_org =(int*) malloc(sizeof(int)*1000000);
+    // int *array_pior =(int*) malloc(sizeof(int)*1000000);
 
     double trocas[2];
     double comparacoes[2];
@@ -55,9 +56,9 @@ int main()
     carrega_vetor_ordenado(array_org, 1, TAM);
     carrega_vetor_pior_caso(array_pior, TAM);
 
-    tabelaBubble(array1, array, array_org, array_pior);
-    tabelaSelection(array1, array, array_org, array_pior);
-    tabelaInsert(array1, array, array_org, array_pior);
+    // tabelaBubble(array1, array, array_org, array_pior);
+    // tabelaSelection(array1, array, array_org, array_pior);
+    // tabelaInsert(array1, array, array_org, array_pior);
     tabelaQuick(array1, array, array_org, array_pior, trocas, comparacoes);
     tabelaMerge(array1, array, array_org, array_pior, trocas, comparacoes);
 
@@ -270,7 +271,7 @@ void testQuick(int array[], int tamanho, double trocas[], double comparacoes[])
     comparacoes[0] = 0;
     double time_spent = 0.0;
     clock_t begin = clock();
-    quicksort(array, 0, tamanho - 1, trocas, comparacoes);
+    quickSort(array, 0, tamanho - 1, trocas, comparacoes);
     clock_t end = clock();
     time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
     printf("Trocas: %.0lf ", trocas[0]);
@@ -319,6 +320,56 @@ void testMerge(int array[], int tamanho, double trocas[], double comparacoes[])
 }
 
 // Metodos de sort
+void quickSort(int arr[], int left, int right, double trocas[], double comparacoes[])
+{
+
+    int i = left, j = right;
+
+    int tmp;
+
+    int pivot = arr[(left + right) / 2];
+
+    /* partition */
+
+    while (i <= j)
+    {
+
+        while (arr[i] < pivot)
+        {
+            i++;
+        }
+        while (arr[j] > pivot)
+        {       
+            j--;
+        }
+
+        comparacoes[0]++;
+        if (i <= j)
+        {
+            trocas[0]++;
+
+            tmp = arr[i];
+
+            arr[i] = arr[j];
+
+            arr[j] = tmp;
+
+            i++;
+
+            j--;
+        }
+    };
+
+    /* recursion */
+
+    if (left < j)
+
+        quickSort(arr, left, j, trocas, comparacoes);
+
+    if (i < right)
+
+        quickSort(arr, i, right, trocas, comparacoes);
+}
 void quicksort(int x[], int lb, int ub, double trocas[], double comparacoes[])
 {
     int j = -1;
@@ -349,11 +400,11 @@ void partition(int x[], int lb, int ub, int *j, double trocas[], double comparac
      * a é o elemento cuja posição
      * final é procurada (pivô)
      */
-    // a = x[lb];
+    a = x[lb];
     // a = x[lb + rand()%(ub+1-lb)];
 
     // Pegando o Pivo como o do meio, para evitar problemas e funcionar certo com 1M.
-    a = x[(lb + ub) / 2];
+    // a = x[(lb + ub) / 2];
 
     /*
      * Inicialização dos ponteiros
