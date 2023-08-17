@@ -25,7 +25,7 @@ void bubbleEstranho(int size, int turnos)
     }
 
     int trocou = 1;
-    int trocas = 0, i = 0, j= 0, k = 0, temp = 0;
+    int trocas = 0, i = 0, j = 0, k = 0, temp = 0;
 
     int array[size];
 
@@ -68,7 +68,7 @@ void bubbleEstranho(int size, int turnos)
                 j++;
                 trocou = 1;
             }
-            
+
             k--;
         }
     }
