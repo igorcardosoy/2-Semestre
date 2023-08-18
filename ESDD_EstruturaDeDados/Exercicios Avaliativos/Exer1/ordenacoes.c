@@ -18,8 +18,7 @@ void tabelaBubble(int array1[], int array[], int array_org[], int array_pior[]);
 void tabelaSelection(int array1[], int array[], int array_org[], int array_pior[]);
 void tabelaInsert(int array1[], int array[], int array_org[], int array_pior[]);
 void tabelaMerge(int array1[], int array[], int array_org[], int array_pior[], double trocas[], double comparacoes[]);
-void quicksort(int x[], int lb, int ub, double trocas[], double comparacoes[]);
-void partition(int x[], int lb, int ub, int *j, double trocas[], double comparacoes[]);
+void quickSort(int arr[], int left, int right, double trocas[], double comparacoes[]);
 void merge(int colecao[], int inicio, int fim, double trocas[], double comparacoes[]);
 void intercala(int colecao[], int inicio, int fim, int meio, double trocas[], double comparacoes[]);
 void bubble_sort(int colecao[], int tamanho);
@@ -29,9 +28,8 @@ void carrega_vetor_aleatorio(int colecao[], int tamanho, int qtd_digitos);
 void carrega_vetor_ordenado(int colecao[], int valor_inicial, int tamanho);
 void carrega_vetor_pior_caso(int colecao[], int tamanho);
 void imprime_vetor(int colecao[], int tamanho);
-void quickSort(int arr[], int left, int right, double trocas[], double comparacoes[]);
 
-// Para fazer funcionar com 1M, aparentemente tem que ser utilizado variaveis globais.
+// Para fazer funcionar com 1M, aparentemente tem que ser utilizado variaveis globais(Dessa forma é possivel usar até 10M).
 int array[TAM], array1[TAM];
 int array_org[TAM];
 int array_pior[TAM];
@@ -44,7 +42,7 @@ int main()
     // int array_pior[TAM];
 
     // Outra forma de declarar os arrays para funcionar é alocando memoria usando a função malloc.
-    // int *array =(int*) malloc(sizeof(int)*1000000); 
+    // int *array =(int*) malloc(sizeof(int)*1000000);
     // int *array1 =(int*) malloc(sizeof(int)*1000000);
     // int *array_org =(int*) malloc(sizeof(int)*1000000);
     // int *array_pior =(int*) malloc(sizeof(int)*1000000);
@@ -56,12 +54,11 @@ int main()
     carrega_vetor_ordenado(array_org, 1, TAM);
     carrega_vetor_pior_caso(array_pior, TAM);
 
-    // tabelaBubble(array1, array, array_org, array_pior);
-    // tabelaSelection(array1, array, array_org, array_pior);
-    // tabelaInsert(array1, array, array_org, array_pior);
+    tabelaBubble(array1, array, array_org, array_pior);
+    tabelaSelection(array1, array, array_org, array_pior);
+    tabelaInsert(array1, array, array_org, array_pior);
     tabelaQuick(array1, array, array_org, array_pior, trocas, comparacoes);
     tabelaMerge(array1, array, array_org, array_pior, trocas, comparacoes);
-
 
     return 0;
 }
@@ -320,6 +317,7 @@ void testMerge(int array[], int tamanho, double trocas[], double comparacoes[])
 }
 
 // Metodos de sort
+// QuickSort com a implementação do Pivo no meio
 void quickSort(int arr[], int left, int right, double trocas[], double comparacoes[])
 {
 
@@ -339,7 +337,7 @@ void quickSort(int arr[], int left, int right, double trocas[], double comparaco
             i++;
         }
         while (arr[j] > pivot)
-        {       
+        {
             j--;
         }
 
@@ -369,81 +367,6 @@ void quickSort(int arr[], int left, int right, double trocas[], double comparaco
     if (i < right)
 
         quickSort(arr, i, right, trocas, comparacoes);
-}
-void quicksort(int x[], int lb, int ub, double trocas[], double comparacoes[])
-{
-    int j = -1;
-
-    if (lb >= ub)
-        return; /* Vetor está classificado */
-
-    partition(x, lb, ub, &j, trocas, comparacoes); /* Particiona os elementos do subvetor
-                                                    * de modo que um dos elementos seja alocado
-                                                    * em sua posição correta. A variável j é a
-                                                    * posição onde este elemento foi alocada
-                                                    */
-
-    quicksort(x, lb, j - 1, trocas, comparacoes); /* Classifica de forma recursiva o subvetor
-                                                   * entre a posição lb e j-1
-                                                   */
-
-    quicksort(x, j + 1, ub, trocas, comparacoes); /* Classifica de forma recursiva o subvetor
-                                                   * entre a posição j+1 e ub
-                                                   */
-}
-void partition(int x[], int lb, int ub, int *j, double trocas[], double comparacoes[])
-{
-
-    int a, down, up, temp;
-
-    /*
-     * a é o elemento cuja posição
-     * final é procurada (pivô)
-     */
-    a = x[lb];
-    // a = x[lb + rand()%(ub+1-lb)];
-
-    // Pegando o Pivo como o do meio, para evitar problemas e funcionar certo com 1M.
-    // a = x[(lb + ub) / 2];
-
-    /*
-     * Inicialização dos ponteiros
-     */
-    up = ub;
-    down = lb;
-    while (down < up)
-    {
-
-        while (x[down] <= a && down < ub)
-        {
-    
-            /*
-             * Sobe no vetor
-             */
-            down++;
-        }
-
-        while (x[up] > a)
-        {
-    
-            /*
-             * Desce no vetor
-             */
-            up--;
-        }
-
-        comparacoes[0]++;
-        if (down < up)
-        {
-            temp = x[down];
-            x[down] = x[up];
-            x[up] = temp;
-            trocas[0]++;
-        }
-    }
-    x[lb] = x[up];
-    x[up] = a;
-    *j = up;
 }
 void merge(int colecao[], int inicio, int fim, double trocas[], double comparacoes[])
 {

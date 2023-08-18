@@ -94,7 +94,7 @@ int buscaBinariaInterativa(int dataset[], int size, int key)
 
     if (stop)
     {
-        return mid;
+        return mid -1;
     }
     else
     {
