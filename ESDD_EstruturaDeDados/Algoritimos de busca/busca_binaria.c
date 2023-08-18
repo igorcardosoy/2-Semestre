@@ -16,28 +16,31 @@ int array[SIZE];
 
 int main()
 {
+
+  int lista[14]={5,18,27,33,44,49,54,67,69,72,79,86,87,92};
+  buscaBinariaInterativa(lista, 14-1, 78);
     
     int key;
     srand((unsigned)time(NULL));
 
-    // // Colocar numeros aleatórios no Array
-    numbers(array);
+    // // // Colocar numeros aleatórios no Array
+    // numbers(array);
 
-    // Digitar a chave a ser encontrada
-    scanf("%d", &key);
+    // // Digitar a chave a ser encontrada
+    // scanf("%d", &key);
 
     // Busca binaria
-    int search = buscaBinariaRecursiva(array, 0, SIZE-1, key);
-    // int search = buscaBinariaInterativa(array, SIZE, key);
+    // int search = buscaBinariaRecursiva(array, 0, SIZE-1, key);
+    // // int search = buscaBinariaInterativa(array, SIZE, key);
 
-    if (search != -1)
-    {
-        printf("Chave encontrada!");
-    }
-    else
-    {
-        printf("Chave invalida!");
-    }
+    // if (search != -1)
+    // {
+    //     printf("Chave encontrada!");
+    // }
+    // else
+    // {
+    //     printf("Chave invalida!");
+    // }
 
     return 0;
 }
@@ -74,6 +77,8 @@ int buscaBinariaInterativa(int dataset[], int size, int key)
     while (left < right && !stop)
     {
         mid = (left + right) / 2;
+
+        printf("%d", dataset[mid]);
 
         if (key == dataset[mid])
         {

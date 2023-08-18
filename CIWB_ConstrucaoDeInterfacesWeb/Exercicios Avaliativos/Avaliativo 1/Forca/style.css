@@ -1,0 +1,119 @@
+body, html
+{
+    height: 100%;
+    width: 100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: whitesmoke;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(51, 49, 54);
+    font-size: 27px;
+}
+
+main{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+input{
+    background-color: rgb(51, 50, 53);
+    border: 0;
+    border: 2px solid whitesmoke;
+    border-radius: 5px;
+    height: 30px;
+    width: 200px    ;
+    color: whitesmoke;
+    padding: 5px;
+}
+
+button{
+    height: 35px;
+    width: 100px;
+    cursor: pointer;
+    background-color: rgb(194, 193, 193);
+    border-radius: 5px;
+    border: 0;
+}
+
+button:hover{
+    background-color: rgb(255, 255, 255);
+}
+
+img{
+    filter: invert();
+    margin-left: 200px;
+    width: 15%;
+}
+
+#reviver{
+    padding: 10px;
+    cursor: pointer;
+}
+
+.zoom{
+    font-size: 20px;
+    color: #000000;
+    transition: font-size 0.5s ease-in-out;
+    animation: rainbow 5s infinite linear;
+  }
+  
+  @keyframes rainbow {
+    0% {
+      color: #000000;
+      font-size: 20px;
+    }
+  
+    10% {
+      color: #FF0000;
+    }
+  
+    20% {
+      color: #FFFF00;
+    }
+  
+    30% {
+      color: #00FF00;
+    }
+  
+    40% {
+      color: #00FFFF;
+    }
+  
+    50% {
+      color: #0000FF;
+      font-size: 30px;
+    }
+  
+    60% {
+      color: #FF00FF;
+    }
+  
+    70% {
+      color: #FFFFFF;
+    }
+  
+    80% {
+      color: #000000;
+    }
+  
+    90% {
+      color: #FFFFFF;
+    }
+  
+    100% {
+      color: #000000;
+      font-size: 20px;
+    }
+  }
