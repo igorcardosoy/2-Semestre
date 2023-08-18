@@ -87,14 +87,14 @@ int buscaBinariaInterativa(int dataset[], int size, int key)
             }
             else
             {
-                right = mid;
+                right = mid - 1;
             }
         }
     }
 
     if (stop)
     {
-        return mid -1;
+        return mid;
     }
     else
     {
