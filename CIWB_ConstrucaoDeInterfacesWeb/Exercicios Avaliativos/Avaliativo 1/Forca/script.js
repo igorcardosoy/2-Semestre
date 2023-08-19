@@ -372,7 +372,4 @@ botao.addEventListener("click", () => {
         
     }
 
-}
-
-);
-
+});
