@@ -230,7 +230,6 @@ botao.addEventListener("click", () => {
         }
     }
 
-
     // Se a letra não for repetida:
     if (!repetida) {
         // Enquanto i for menor que o tamanho da palavra. 
