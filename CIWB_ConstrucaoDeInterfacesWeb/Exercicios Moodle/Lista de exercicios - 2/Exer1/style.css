@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+html, body{
+    width: 100%;
+    background-color: rgb(65, 56, 69);
+    text-align: center;
+    color: aliceblue;
+}
+
+main{
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#tabuada{
+    border: 3px solid rgb(40, 34, 42);
+    border-radius: 5px;
+    display: none;
+    gap: 3px;
+    flex-direction: column;
+    padding: 15px;
+}
+
+#botao{
+    height: 30px;
+    width: 80px;
+    border-radius: 5px;
+    background-color: aliceblue;
+    border: 0;
+    cursor: pointer;
+}
+
+#num{
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    border: 0;
+}
