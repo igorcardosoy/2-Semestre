@@ -28,7 +28,7 @@ function onClick() {
 
         divNumbers.style.display = "flex";
 
-        for (let index = inputMinValue + 1; index < inputMaxValue; index++) {
+        for (let index = inputMinValue ; index <= inputMaxValue; index++) {
 
             if (index % 2 === 0 && index % 3 === 0) {
                 createElementP(index);
