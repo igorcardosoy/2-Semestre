@@ -9,23 +9,27 @@ public class Triangulo {
 
     private boolean isTriangulo()
     {
-        return (a + b > c && b + c > a && a + c > b);
+        return a + b > c && b + c > a && a + c > b;
     }
 
     public boolean isEquilatero()
     {
         if(isTriangulo())
         {
-            return (a == b && a == c);
+            return a == b && a == c;
         }
+
+        return false;
     }
 
     public boolean isEscaleno()
     {
         if(isTriangulo())
         {
-            return (a != b && b != c && a != c);
+            return a != b && b != c && a != c;
         }
+        
+        return false;
     }
 
     public boolean isIsoceles()

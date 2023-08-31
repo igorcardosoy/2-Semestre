@@ -23,7 +23,10 @@ public class Main {
                 System.out.println("Isoceles");
             }else if (triangulo.isEscaleno()){
                 System.out.println("Escaleno");
+            }else{
+                System.out.println("Não é triangulo");
             }
+
         }
 
         input.close();
