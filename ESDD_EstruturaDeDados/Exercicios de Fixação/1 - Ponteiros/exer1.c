@@ -1,34 +1,63 @@
-/*
-1. Elabore um sistema que leia os valores de uma equação do 2º grau (a, b e c) e apresente os possíveis resultados. O programa deve utilizar função com retorno void, de forma que os resultados sejam obtidos por passagem de parâmetro por referência. Atenção, a leitura de dados e impressão de resultados deve ser realizada na função main().
-*/
 #include <stdio.h>
-#include <stdlib.h>
+#include <math.h>
+#include <stdbool.h>
 
-void scan(int *a, int *b, int *c);
+/**
+ * Função recebe os valores de a, b e c (passagem de parâmetro
+ * por valor, visto que esses dados não serão alterados pela
+ * função) e recebe a referência da variável delta (ponteiro) para
+ * que o resultado altere o valor desse ponteiro.
+*/
+void calcular_delta(float a, float b, float c, float* delta);
 
 
-void main()
-{
-    int *a, *b, *c;
+/**
+ * Função recebe por valor os dados de uma equação do 2o grau. 
+ * Os argumentos possui_raizes, x1 e x2 são ponteiros que recebem 
+ * os resultados da equação.
+*/
+void calcular_raizes(float a, float b, float c, bool* possui_raizes, float* x1, float* x2);
 
-    a = malloc(sizeof(int));
-    b = malloc(sizeof(int));
-    c = malloc(sizeof(int));
 
-    scan(a, b, c);
 
+int main(){
+    
+    float a, b, c;
+    bool tem_solucao;
+    float raiz1, raiz2;
+
+    printf("Informe os valores de A, B e C: \n");
+    scanf("%f%f%f", &a, &b, &c);
+
+    calcular_raizes(a, b, c, &tem_solucao, &raiz1, &raiz2);
+
+    if (tem_solucao){
+        printf("Raizes: \n\tX' --> %f\n\tX'' -> %f\n\n", raiz1, raiz2);
+    }else{
+        printf("Problema não possui raizes\n\n");
+    }
+
+    return 0;
 }
 
-void scan(int *a, int *b, int *c)
-{
-    printf("Digite o valor de a: ");
-    scanf("%d", a);
 
-    printf("Digite o valor de b: ");
-    scanf("%d", b);
+void calcular_raizes(float a, float b, float c, bool* possui_raizes, float* x1, float* x2){
+    float dlt;
 
-    printf("Digite o valor de c: ");
-    scanf("%d", c);
+    calcular_delta(a, b, c, &dlt);
+    if(dlt < 0){
+        *possui_raizes = false;
+    } else if(dlt == 0){
+        *possui_raizes = true;
+        *x1 = (-b) / (2 * a);
+        *x2 = *x1;
+    } else{
+        *possui_raizes = true;
+        *x1 = (-b + sqrt(dlt)) / (2 * a);
+        *x2 = (-b - sqrt(dlt)) / (2 * a);
+    }
 }
 
-
+void calcular_delta(float a, float b, float c, float* delta){
+    *delta = pow(b, 2) - 4 * a * c;
+}
