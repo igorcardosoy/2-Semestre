@@ -5,16 +5,68 @@ let position = 0;
 let number = [];
 let op;
 
+function resetAll() {
+    number[0] = NaN;
+    number[1] = NaN;
+    position = 0;
+    input.value = null;
+}
+
+function division(){
+    number[0] = parseFloat(number[0]) / parseFloat(number[1]);
+}
+function plus(){
+    number[0] = parseFloat(number[0]) + parseFloat(number[1]);
+}
+function minus(){
+    number[0] = parseFloat(number[0]) - parseFloat(number[1]);
+}
+function multiply(){
+    number[0] = parseFloat(number[0]) * parseFloat(number[1]);
+}
+
+function methods(operation) {
+    switch (operation) {
+        case "/":
+            division();
+            break;
+        case "*":
+            multiply();
+            break;
+        case "-":
+            minus();
+            break;
+        case "+":
+            plus();
+            break;
+        default:
+            break;
+    }
+}
+
+function doCalc(operation) {
+    number[position] = (input.value);
+    input.value = null;
+
+    op = operation;
+
+    if (position == 1) {
+        position = 0;
+        methods(operation);
+        input.value = number[0];
+    }
+    position++;
+}
+
 for (let index = 0; index < allButtons.length; index++) {
     allButtons[index].addEventListener("click", () => {
-        
-        let keyPressed = allButtons[index].innerHTML
+
+        let keyPressed = allButtons[index].innerHTML;
 
         if (!isNaN(keyPressed) || keyPressed == ".") {
             input.value += keyPressed;
         }
-        else
-        {
+        else {
             switch (keyPressed) {
                 case "←":
                     input.value = input.value.slice(0, input.value.length - 1);
@@ -23,93 +75,26 @@ for (let index = 0; index < allButtons.length; index++) {
                     input.value = null;
                     break;
                 case "C":
-                    number[0] = null;
-                    number[1] = null;
-                    position = 0;
-                    operator = null;
-                    input.value = null;
+                    resetAll();
                     break;
                 case "/":
-                    number[position] = (input.value);
-                    input.value = null;
-
-                    op = "/";
-
-                    if (position == 1) {
-                        position = 0;
-                        number[0] = parseFloat(number[0]) / parseFloat(number[1]);
-                        input.value = number[0];
-                    }
-                    position++;
+                    doCalc("/");
                     break;
                 case "*":
-                    number[position] = (input.value);
-                    input.value = null;
-
-                    op = "*";
-
-                    if (position == 1) {
-                        position = 0;
-                        number[0] = parseFloat(number[0]) * parseFloat(number[1]);
-                        input.value = number[0];
-                    }
-                    position++;
+                    doCalc("*");
                     break;
                 case "+":
-                    number[position] = (input.value);
-                    input.value = null;
-
-                    op = "+";
-
-                    if (position == 1) {
-                        position = 0;
-                        number[0] = parseFloat(number[0]) + parseFloat(number[1]);
-                        input.value = number[0];
-                    }
-                    position++;
+                    doCalc("+");
                     break;
                 case "-":
-                    number[position] = (input.value);
-                    input.value = null;
-
-                    op = "-";
-
-                    if (position == 1) {
-                        position = 0;
-                        number[0] = parseFloat(number[0]) - parseFloat(number[1]);
-                        input.value = number[0];
-                    }
-                    position++;
+                    doCalc("-");
                     break;
                 case "=":
-
-                    if (!isNaN(number[0])) {
+                    if (!isNaN(number[0]))
                         number[position] = parseFloat(input.value);
-                    }
-                    
-
-                    if (!isNaN(number[1])) 
-                    {
-
+                    if (!isNaN(number[1])) {
                         position = 0;
-
-                        switch (op) {
-                            case "+":
-                                number[0] = parseFloat(number[0]) + parseFloat(number[1]);
-                                break;
-                            case "-":
-                                number[0] = parseFloat(number[0]) - parseFloat(number[1]);
-                                break;
-                            case "/":
-                                number[0] = parseFloat(number[0]) / parseFloat(number[1]);
-                                break;
-                            case "*":
-                                number[0] = parseFloat(number[0]) * parseFloat(number[1]);
-                                break;
-                            default:
-                            break;
-                        }
-
+                        methods(op);
                         input.value = number[0];
                     }
                     break;
