@@ -83,29 +83,35 @@ for (let index = 0; index < allButtons.length; index++) {
                     break;
                 case "=":
 
-                    number[position] = parseFloat(input.value);
-                    position = 0;
-
-                    switch (op) {
-                        case "+":
-                            number[0] = parseFloat(number[0]) + parseFloat(number[1]);
-                            break;
-                        case "-":
-                            number[0] = parseFloat(number[0]) - parseFloat(number[1]);
-                            break;
-                        case "/":
-                            number[0] = parseFloat(number[0]) / parseFloat(number[1]);
-                            break;
-                        case "*":
-                            number[0] = parseFloat(number[0]) * parseFloat(number[1]);
-                            break;
-                        default:
-                        break;
+                    if (!isNaN(number[0])) {
+                        number[position] = parseFloat(input.value);
                     }
+                    
 
-                    position = 0;
-                    input.value = number[0];
+                    if (!isNaN(number[1])) 
+                    {
 
+                        position = 0;
+
+                        switch (op) {
+                            case "+":
+                                number[0] = parseFloat(number[0]) + parseFloat(number[1]);
+                                break;
+                            case "-":
+                                number[0] = parseFloat(number[0]) - parseFloat(number[1]);
+                                break;
+                            case "/":
+                                number[0] = parseFloat(number[0]) / parseFloat(number[1]);
+                                break;
+                            case "*":
+                                number[0] = parseFloat(number[0]) * parseFloat(number[1]);
+                                break;
+                            default:
+                            break;
+                        }
+
+                        input.value = number[0];
+                    }
                     break;
                 default:
                     console.log("Não encontrado!");
