@@ -5,6 +5,8 @@ let position = 0;
 let number = [];
 let op;
 
+
+// Reseta todos os parametros
 function resetAll() {
     number[0] = NaN;
     number[1] = NaN;
@@ -12,6 +14,8 @@ function resetAll() {
     input.value = null;
 }
 
+
+// Funções para fazer as contas.
 function division(){
     number[0] = parseFloat(number[0]) / parseFloat(number[1]);
 }
@@ -25,6 +29,7 @@ function multiply(){
     number[0] = parseFloat(number[0]) * parseFloat(number[1]);
 }
 
+// Decide qual o metodo correto para fazer a operação
 function methods(operation) {
     switch (operation) {
         case "/":
@@ -44,6 +49,7 @@ function methods(operation) {
     }
 }
 
+// Faz o calculo com a operação e muda os parametros.
 function doCalc(operation) {
     number[position] = (input.value);
     input.value = null;
