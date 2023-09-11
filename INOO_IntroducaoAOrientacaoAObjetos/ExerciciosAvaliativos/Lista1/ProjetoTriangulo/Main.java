@@ -4,7 +4,6 @@ public class Main {
     public static void main(String[] args){
         Scanner input;
         Triangulo triangulo;
-
         int a, b, c;
 
         input = new Scanner(System.in);
@@ -15,6 +14,7 @@ public class Main {
             b = input.nextInt();
             c = input.nextInt();
 
+            
             triangulo = new Triangulo(a, b, c);
 
             if (triangulo.isEquilatero()){

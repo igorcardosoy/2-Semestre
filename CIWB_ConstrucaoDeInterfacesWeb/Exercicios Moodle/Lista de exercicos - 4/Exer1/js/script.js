@@ -12,6 +12,7 @@ function resetAll() {
     number[1] = NaN;
     position = 0;
     input.value = null;
+    op = null;
 }
 
 
@@ -56,12 +57,15 @@ function doCalc(operation) {
 
     op = operation;
 
-    if (position == 1) {
+    console.log(number[0]);
+    console.log(number[1]);
+    if (position == 1 && !isNaN(number[0])) {
         position = 0;
         methods(operation);
         input.value = number[0];
     }
     position++;
+    
 }
 
 for (let index = 0; index < allButtons.length; index++) {
