@@ -17,14 +17,71 @@ public class Main {
         System.out.println(candidato2.toString());
         System.out.println(candidato3.toString());
 
-        candidato1.getNotaFinal()
+        candidato1.getNotaFinal();
 
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-
+        if (candidato1.getNotaFinal() > candidato2.getNotaFinal()) {
+            if (candidato1.getNotaFinal() > candidato3.getNotaFinal()) {
+                System.out.println("Nota: "+candidato1.getNotaFinal()+" | Nome: "+candidato1.getNome());
+                if (candidato2.getNotaFinal() > candidato3.getNotaFinal()) {
+                    System.out.println("Nota: "+candidato2.getNotaFinal()+" | Nome: "+candidato2.getNome());
+                    System.out.println("Nota: "+candidato3.getNotaFinal()+" | Nome: "+candidato3.getNome());
+                }
+                else
+                {
+                    System.out.println("Nota: "+candidato3.getNotaFinal()+" | Nome: "+candidato3.getNome());
+                    System.out.println("Nota: "+candidato2.getNotaFinal()+" | Nome: "+candidato2.getNome());
+                }
             }
+            else
+            {
+                System.out.println("Nota: "+candidato3.getNotaFinal()+" | Nome: "+candidato3.getNome());
+                System.out.println("Nota: "+candidato1.getNotaFinal()+" | Nome: "+candidato1.getNome());
+                System.out.println("Nota: "+candidato2.getNotaFinal()+" | Nome: "+candidato2.getNome());
+            }
+            
+        }
+        else if (candidato2.getNotaFinal() > candidato1.getNotaFinal()) {
+            if (candidato2.getNotaFinal() > candidato3.getNotaFinal()) {
+                    System.out.println("Nota: "+candidato2.getNotaFinal()+" | Nome: "+candidato2.getNome());
+                    
+                if (candidato1.getNotaFinal() > candidato3.getNotaFinal()) {
+                    System.out.println("Nota: "+candidato1.getNotaFinal()+" | Nome: "+candidato1.getNome());
+                    System.out.println("Nota: "+candidato3.getNotaFinal()+" | Nome: "+candidato3.getNome());
+                }
+                else
+                {
+                    System.out.println("Nota: "+candidato3.getNotaFinal()+" | Nome: "+candidato3.getNome());
+                    System.out.println("Nota: "+candidato1.getNotaFinal()+" | Nome: "+candidato1.getNome());
+                }
+            }
+            else
+            {
+                    System.out.println("Nota: "+candidato3.getNotaFinal()+" | Nome: "+candidato3.getNome());
+                    System.out.println("Nota: "+candidato2.getNotaFinal()+" | Nome: "+candidato2.getNome());
+                    System.out.println("Nota: "+candidato1.getNotaFinal()+" | Nome: "+candidato1.getNome());
+            }
+            
+        }
+        else if (candidato3.getNotaFinal() > candidato1.getNotaFinal()) {
+            if (candidato3.getNotaFinal() > candidato2.getNotaFinal()) {
+                System.out.println("Nota: "+candidato3.getNotaFinal()+" | Nome: "+candidato3.getNome());
+                if (candidato1.getNotaFinal() > candidato2.getNotaFinal()) {
+                    System.out.println("Nota: "+candidato1.getNotaFinal()+" | Nome: "+candidato1.getNome());
+                    
+                }
+                else
+                {
+                    System.out.println("Nota: "+candidato2.getNotaFinal()+" | Nome: "+candidato2.getNome());
+                    System.out.println("Nota: "+candidato1.getNotaFinal()+" | Nome: "+candidato1.getNome());
+                }
+            }
+            else
+            {
+                System.out.println("Nota: "+candidato2.getNotaFinal()+" | Nome: "+candidato2.getNome());
+                System.out.println("Nota: "+candidato3.getNotaFinal()+" | Nome: "+candidato3.getNome());
+                System.out.println("Nota: "+candidato1.getNotaFinal()+" | Nome: "+candidato1.getNome());
+            }
+            
         }
     }
 }
