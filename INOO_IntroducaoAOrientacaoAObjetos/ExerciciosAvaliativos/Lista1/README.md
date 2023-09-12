@@ -1,2 +1,0 @@
-﻿# inoo-lista1
-Exercicios avaliativos de orientação a objetos, utilizando java.
