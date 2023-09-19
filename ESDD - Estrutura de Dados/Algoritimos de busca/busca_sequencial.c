@@ -123,7 +123,6 @@ int busca_sequencial_3(int dataset[], int size, int key)
 
 int busca_sequencial_ord(int dataset[], int size, int key)
 {
-    {
     int i = 0;
 
     while (i < size && dataset[i] < key)
@@ -131,14 +130,6 @@ int busca_sequencial_ord(int dataset[], int size, int key)
         i++;
     }
 
-    if (dataset[i] == key)
-    {
-        return i;
-    }
-    else
-    {
-        return -1;
-    }
-}
+    return dataset[i] == key ? i : -1;
 }
 
