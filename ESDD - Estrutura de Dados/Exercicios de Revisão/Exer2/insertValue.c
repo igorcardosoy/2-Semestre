@@ -22,32 +22,34 @@ int main()
         printf("\nDigite o valor a adicionar ao array: ");
         scanf("%d", &value);
 
-        increaseSize(arrayInt, &size);
-        insertValue(arrayInt, value, size);
+        if (value != 0)
+        {
+            increaseSize(arrayInt, &size);
+            insertValue(arrayInt, value, size);
+        }
+        else
+        {
+            stop = true;
+        }
 
         printArray(arrayInt, size);
-
-        printf("\nParar? (1/0): ");
-        scanf("%d", &x);
-
-        stop = x == 1 ? true : false;
-
     }
-    
+
     free(arrayInt);
-    
+
     return 0;
 }
-void increaseSize(int array[], int *size){
-    *size+=1;
-    array = realloc(*array, sizeof(int) * (*size));
+void increaseSize(int array[], int *size)
+{
+    *size += 1;
+    array = realloc(array, sizeof(int) * (*size));
 }
 
 void loadArray(int arrayInt[], int size)
 {
     for (int i = 0; i < size; i++)
     {
-        arrayInt[i] = i*2;
+        arrayInt[i] = i * 2;
     }
 }
 
@@ -69,10 +71,10 @@ void insertValue(int arrayInt[], int value, int size)
     }
 }
 
-void printArray(int arrayInt[], int size){
+void printArray(int arrayInt[], int size)
+{
     for (int i = 0; i < size; i++)
     {
         printf("Array [%d]: %d\n", i, arrayInt[i]);
     }
-    
 }
