@@ -25,17 +25,16 @@ int main()
 }
 
 bool strComp(char* sentence1, char* sentence2){
-    while (*sentence2 != '\0')
-    {
-
-        if (*sentence1 == *sentence2 && *sentence1 != '\0')
-        {
-            return true;
-        }
-
-        sentence1++;
-        sentence2++;
-    }
     
-    return false;
+    int  i, j;
+
+    for (i = 0, j = 0; *(sentence1+i) != '\0' && *(sentence2+j) != '\0'; i++)
+    {
+        if (*(sentence1 + i) == *(sentence2+j))
+        {
+            j++;
+        }
+    }
+
+    return *(sentence2+j) == '\0' ? true : false;
 }
