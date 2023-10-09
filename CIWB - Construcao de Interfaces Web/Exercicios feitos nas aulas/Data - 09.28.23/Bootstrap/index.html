@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootstrap - Inicio</title>
-    <link rel="stylesheet" type="text/css" href="../styles/style.css">
-    <script defer src="../scripts/script.js"></script>
+    <link rel="stylesheet" type="text/css" href="./styles/style.css">
+    <script defer src="./scripts/darkMode.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script defer src="./scripts/register.js"></script>
 </head>
 
 <body>
@@ -29,10 +30,10 @@
                         <a class="nav-link" aria-current="page" href="#">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pato</a>
+                        <a class="nav-link" href="#">História</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" aria-disabled="true">Ganso</a>
+                        <a class="nav-link" href="#" aria-disabled="true">Escritor</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -47,28 +48,28 @@
                         </ul>
                     </li>
                 </ul>
-                <button type="button" class="btn btn-dark darkMode">Switch mode</button>
+                <button type="button" class="btn btn-dark darkMode">Tema claro</button>
             </div>
         </div>
     </nav>
     
-    <div id="main" class="container">
+    <div id="main" class="container center">
         <p>Escolha sua foto de perfil :&#41;</p>
 
         <div id="carouselId" class="carousel w-25">
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
-                    <img src="../images/eren.jpg" class="w-100 d-block" alt="First slide">
+                    <img src="./images/eren.jpg" class="w-100 d-block" alt="First slide">
                     <div class="carousel-caption d-none d-md-block">
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="../images/kilua.jpg" class="w-100 d-block" alt="Second slide">
+                    <img src="./images/kilua.jpg" class="w-100 d-block" alt="Second slide">
                     <div class="carousel-caption d-none d-md-block">
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="../images/mikasa.jpg" class="w-100 d-block" alt="Third slide">
+                    <img src="./images/mikasa.jpg" class="w-100 d-block" alt="Third slide">
                     <div class="carousel-caption d-none d-md-block">
                     </div>
                 </div>
@@ -83,29 +84,20 @@
             </button>
         </div>
 
-        <div class="container account"> 
+        <div class="container account center"> 
             <div class="mb-3">
-                <label for="" class="form-label">Email</label>
-                <input type="email" class="form-control accountInput" name="" id="" aria-describedby="emailHelpId" placeholder="abc@mail.com">
+                <label for="userEmail" class="form-label">Email</label>
+                <input type="email" class="form-control accountInput" name="userEmail" id="userEmail" aria-describedby="emailHelpId" placeholder="abc@mail.com">
               </div>
       
               <div class="mb-3">
-                <label for="" class="form-label">Password</label>
-                <input type="password" class="form-control accountInput" name="" id="" placeholder="">
+                <label for="userPassword" class="form-label">Password</label>
+                <input type="password" class="form-control accountInput" name="userPassword" id="userPassword" placeholder="Digite sua senha...">
               </div>
       
-              <button type="button" class="btn btn-primary submit">Cadastrar</button>
+              <button id="registerButton" type="button" class="btn btn-primary submit">Cadastrar</button>
         </div>
-        
-
-        
     </div>
-    
-    <footer>
-        <ul class="nav justify-content-center">
-            <p>heloo</p>
-        </ul>
-    </footer>
 
 </body>
 
