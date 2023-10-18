@@ -1,45 +1,61 @@
-#include ".\src\include\SDL2\SDL.h"
-#include ".\src\include\SDL2\SDL_image.h"
+#include ".\SDL2\include\SDL2\SDL.h"
+#include ".\SDL2\include\SDL2\SDL_image.h"
+#include <windows.h>
 #include <stdio.h>
 #include <stdbool.h>
 
-#define WIDTH 640 
+#define WIDTH 640
 #define HEIGHT 480
 
-typedef struct {
+typedef struct
+{
   int x, y;
-  SDL_Texture* player_texture;
+  SDL_Texture *player_texture;
 } Player;
 
-typedef struct {
-  SDL_Texture* map_texture;
+typedef struct
+{
   int x, y;
+  SDL_Texture *cactus_texture;
+} Cactus;
+
+typedef struct
+{
+  int x, y;
+  SDL_Texture *map_texture;
 } Map;
 
-typedef struct {
+typedef struct
+{
   Player player;
+  Cactus cactus;
   Map map;
 } GameState;
 
-int processEvents(SDL_Window* window, GameState* gameState);
-void doRender(SDL_Renderer* renderer, GameState* gameState);
+int processEvents(SDL_Window *window, GameState *gameState);
+void doRender(SDL_Renderer *renderer, GameState *gameState);
+bool areColliding(GameState gameState);
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
   bool stop = false;
 
-  SDL_Window* window = NULL;
-  SDL_Renderer* render = NULL;
-  SDL_Surface* player_texture_surface = NULL;
-  SDL_Surface* map_img_surface = NULL;
+  SDL_Window *window = NULL;
+  SDL_Renderer *render = NULL;
+  SDL_Surface *player_texture_surface = NULL;
+  SDL_Surface *map_img_surface = NULL;
+  SDL_Surface *cactus_text_surface = NULL;
 
   GameState gameState;
 
   gameState.map.x = 0;
   gameState.map.y = 0;
 
-  gameState.player.x = 220;
-  gameState.player.y = 140;
+  gameState.player.x = 0;
+  gameState.player.y = 300;
+
+  gameState.cactus.x = WIDTH;
+  gameState.cactus.y = 300;
 
   SDL_Init(SDL_INIT_VIDEO);
 
@@ -47,7 +63,8 @@ int main(int argc, char* argv[])
   render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
   player_texture_surface = IMG_Load("./images/t_rex.png");
-  if (player_texture_surface == NULL) {
+  if (player_texture_surface == NULL)
+  {
     printf("Imagem do 'player' nao encontrada!");
     SDL_Quit();
     return 1;
@@ -61,15 +78,31 @@ int main(int argc, char* argv[])
     return 1;
   }
 
-  gameState.map.map_texture = SDL_CreateTextureFromSurface( render, map_img_surface);
-  gameState.player.player_texture = SDL_CreateTextureFromSurface( render, player_texture_surface);
+  cactus_text_surface = IMG_Load("./images/cactus.png");
+  if (cactus_text_surface == NULL)
+  {
+    printf("Imagem do 'cactus' nao encontrada!");
+    SDL_Quit();
+    return 1;
+  }
 
+  gameState.cactus.cactus_texture = SDL_CreateTextureFromSurface(render, cactus_text_surface);
+  gameState.map.map_texture = SDL_CreateTextureFromSurface(render, map_img_surface);
+  gameState.player.player_texture = SDL_CreateTextureFromSurface(render, player_texture_surface);
+
+  SDL_FreeSurface(cactus_text_surface);
   SDL_FreeSurface(map_img_surface);
   SDL_FreeSurface(player_texture_surface);
 
-  while (!stop) {
+  while (!stop)
+  {
     stop = processEvents(window, &gameState);
     doRender(render, &gameState);
+
+    if (areColliding(gameState))
+    {
+      printf("Relou\n");
+    }
 
     SDL_Delay(10);
   }
@@ -84,53 +117,58 @@ int main(int argc, char* argv[])
   return 0;
 }
 
-
-int processEvents(SDL_Window* window, GameState* gameState)
+int processEvents(SDL_Window *window, GameState *gameState)
 {
   SDL_Event event;
   bool stop;
 
-  while (SDL_PollEvent(&event)) {
-    switch (event.type) {
-      case SDL_WINDOWEVENT_CLOSE:
-        if (window) {
-          SDL_DestroyWindow(window);
-          window = NULL;
-          stop = true;
-        }
-        break;
-      case SDL_KEYDOWN:
-        switch (event.key.keysym.sym) {
-          case SDLK_ESCAPE:
-            stop = true;
-            break;
-        }
-        break;
-      case SDL_QUIT:
+  if (gameState->player.y < 300)
+    gameState->player.y += 2;
+
+  if (gameState->cactus.x == 0)
+    gameState->cactus.x = WIDTH;
+
+  gameState->cactus.x -= 5;
+
+  while (SDL_PollEvent(&event))
+  {
+    switch (event.type)
+    {
+    case SDL_WINDOWEVENT_CLOSE:
+      if (window)
+      {
+        SDL_DestroyWindow(window);
+        window = NULL;
+        stop = true;
+      }
+      break;
+    case SDL_KEYDOWN:
+      switch (event.key.keysym.sym)
+      {
+      case SDLK_ESCAPE:
         stop = true;
         break;
+      case SDLK_UP:
+        if (gameState->player.y == 300)
+          gameState->player.y -= 150;
+        break;
+      }
+      break;
+    case SDL_QUIT:
+      stop = true;
+      break;
     }
-
-    const Uint8* state = SDL_GetKeyboardState(NULL);
-    if (state[SDL_SCANCODE_LEFT])
-      gameState->player.x -= 10;
-    if (state[SDL_SCANCODE_RIGHT])
-      gameState->player.x += 10;
-    if (state[SDL_SCANCODE_UP])
-      gameState->player.y -= 10;
-    if (state[SDL_SCANCODE_DOWN])
-      gameState->player.y += 10;
   }
-  
+
   if (gameState->map.x == -480)
-      gameState->map.x = 0;
-    
-    gameState->map.x -= 3;
+    gameState->map.x = 0;
+
+  gameState->map.x -= 3;
 
   return stop;
 }
 
-void doRender(SDL_Renderer* renderer, GameState* gameState)
+void doRender(SDL_Renderer *renderer, GameState *gameState)
 {
   SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 
@@ -138,11 +176,22 @@ void doRender(SDL_Renderer* renderer, GameState* gameState)
 
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-  SDL_Rect mapRect = { gameState->map.x, gameState->map.y, WIDTH*2, HEIGHT};
+  SDL_Rect mapRect = {gameState->map.x, gameState->map.y, WIDTH * 2, HEIGHT};
   SDL_RenderCopy(renderer, gameState->map.map_texture, NULL, &mapRect);
+
+  SDL_Rect cactusRect = {gameState->cactus.x, gameState->cactus.y, 54, 64};
+  SDL_RenderCopy(renderer, gameState->cactus.cactus_texture, NULL, &cactusRect);
 
   SDL_Rect playerRect = {gameState->player.x, gameState->player.y, 64, 64};
   SDL_RenderCopy(renderer, gameState->player.player_texture, NULL, &playerRect);
 
   SDL_RenderPresent(renderer);
+}
+
+bool areColliding(GameState gameState)
+{
+  if (gameState.player.x == gameState.cactus.x)
+    return true;
+
+  return false;
 }
