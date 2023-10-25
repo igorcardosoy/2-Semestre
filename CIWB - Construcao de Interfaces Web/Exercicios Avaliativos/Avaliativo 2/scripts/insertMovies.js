@@ -1,31 +1,42 @@
-let template = document.getElementById('template')
+let template = document.getElementById('card-template')
 let idCount = 0
 let formatedDate
 
+const logoButton = document.querySelector('.popularity-movies')
 const popularButton = document.querySelector('#popularity-movies')
 const topRatedButton = document.querySelector('#top-rated-movies')
 const upcomingButton = document.querySelector('#upcoming-movies')
 
-popularButton.addEventListener('click', () => {
+logoButton.addEventListener('click', async () => {
   reset()
-  request('https://api.themoviedb.org/3/movie/popular?language=pt-BR&page=1')
   document.querySelector('#main-title').textContent = 'Filmes populares'
+  await requestList('https://api.themoviedb.org/3/movie/popular?language=pt-BR&page=1')
+  await buttons()
 })
 
-topRatedButton.addEventListener('click', () => {
+popularButton.addEventListener('click', async () => {
   reset()
-  request('https://api.themoviedb.org/3/movie/top_rated?language=pt-BR&page=1')
+  document.querySelector('#main-title').textContent = 'Filmes populares'
+  await requestList('https://api.themoviedb.org/3/movie/popular?language=pt-BR&page=1')
+  await buttons()
+})
+
+topRatedButton.addEventListener('click', async () => {
+  reset()
   document.querySelector('#main-title').textContent = 'Filmes mais bem avaliados'
+  await requestList('https://api.themoviedb.org/3/movie/top_rated?language=pt-BR&page=1')
+  await buttons()
 })
 
 upcomingButton.addEventListener('click', async () => {
-  await reset()
-  await request('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=primary_release_date.desc')
-  await request('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=2&sort_by=primary_release_date.desc')  
+  reset()
   document.querySelector('#main-title').textContent = 'Filmes que ainda vão lançar'
+  await requestList('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=primary_release_date.desc')
+  await requestList('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=2&sort_by=primary_release_date.desc')
+  await buttons()
 })
 
-async function request(url = 'https://api.themoviedb.org/3/movie/popular?language=pt-BR&page=1') {
+async function requestList(url = 'https://api.themoviedb.org/3/movie/popular?language=pt-BR&page=1') {
   const options = {
     method: 'GET',
     headers: {
@@ -36,17 +47,16 @@ async function request(url = 'https://api.themoviedb.org/3/movie/popular?languag
 
   const data = await fetch(url, options)
   const result = await data.json();
-  const resultFinal = await result.results;
+  const finalResult = await result.results;
 
-  if (resultFinal == null) {
+  if (finalResult == null) {
     for (let index = 1; index < 20; index++) {
       errorComplete(index)
     }
   } else {
 
-    resultFinal.forEach(movie => {
+    finalResult.forEach(movie => {
 
-      console.log(movie)
       if (movie.poster_path != null) {
         if (movie.title == null) {
           formatedDate = new Date(movie.first_air_date);
@@ -62,14 +72,6 @@ async function request(url = 'https://api.themoviedb.org/3/movie/popular?languag
           template.querySelector('.movie-backdrop').src = 'https://image.tmdb.org/t/p/original' + movie.poster_path
         }
 
-        if (movie.vote_average != 0) {
-          template.querySelector('.vote-section').style.display = 'block'
-          template.querySelector('.vote-avg').textContent = 'Nota média: ' + movie.vote_average.toFixed(1)
-          template.querySelector('.vote-count').textContent = 'Quantidade de avaliações: ' + movie.vote_count
-        } else {
-          template.querySelector('.vote-section').style.display = 'none'
-        }
-
         if (movie.overview != '') {
           template.querySelector('.overview-section').style.display = 'block'
           template.querySelector('.movie-overview').textContent = movie.overview
@@ -78,10 +80,18 @@ async function request(url = 'https://api.themoviedb.org/3/movie/popular?languag
         }
 
         template.querySelector('.movie-img').src = 'https://image.tmdb.org/t/p/original' + movie.poster_path
-        template.querySelector('.popularity').textContent = movie.popularity
         template.querySelector('.release-date').textContent = formatedDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' })
 
-        AtributesAtt()
+        template.querySelector('.page-button').removeAttribute('id')
+        template.querySelector('.page-button').setAttribute('id', movie.id)
+
+        template.querySelector('.modal-title').removeAttribute('id')
+        template.querySelector('.modal').removeAttribute('id')
+        template.querySelector('.card-type').removeAttribute('data-bs-target')
+
+        template.querySelector('.modal-title').setAttribute('id', 'modalTitleId' + idCount)
+        template.querySelector('.modal').setAttribute('id', 'modal-id-' + idCount)
+        template.querySelector('.card-type').setAttribute('data-bs-target', '#modal-id-' + idCount)
 
         document.querySelector('#cards').innerHTML += template.innerHTML
 
@@ -93,6 +103,10 @@ async function request(url = 'https://api.themoviedb.org/3/movie/popular?languag
 
 function reset() {
   idCount = 0;
+  if (document.querySelector('#main-movie') != null) {
+    document.querySelector('#main-movie').remove()
+  }
+  document.querySelector('#main-cards').style.display = ''
   document.querySelector('#cards').innerHTML = ''
 }
 
@@ -103,18 +117,9 @@ function title(movieTitle) {
   template.querySelector('.modal-title').textContent = movieTitle
 }
 
-request()
-document.getElementById('template').remove()
+requestList()
+document.getElementById('card-template').remove()
 
-function AtributesAtt() {
-  template.querySelector('.modal-title').removeAttribute('id')
-  template.querySelector('.modal').removeAttribute('id')
-  template.querySelector('.card-type').removeAttribute('data-bs-target')
-
-  template.querySelector('.modal-title').setAttribute('id', 'modalTitleId' + idCount)
-  template.querySelector('.modal').setAttribute('id', 'modal-id-' + idCount)
-  template.querySelector('.card-type').setAttribute('data-bs-target', '#modal-id-' + idCount)
-}
 
 function errorComplete(index) {
   template.querySelector('.movie-title').textContent = 'Titulo mt foda';
