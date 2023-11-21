@@ -40,8 +40,7 @@ int main()
 
     int turnos = 1, size = 1;
 
-    while (size != 0 && turnos != 0)
-    {
+    while (size != 0 && turnos != 0) {
         scanf("%d %d", &size, &turnos);
 
         bubbleEstranho(size, turnos);
@@ -52,49 +51,38 @@ int main()
 
 void bubbleEstranho(int size, int turnos)
 {
-    if (!size && !turnos)
-    {
+    if (!size && !turnos) {
         return;
     }
 
     int trocou = 1;
     int trocas = 0, i = 0, j = 0, k = 0, temp = 0;
 
-    int array[size];
+    int* array = (int) malloc(sizeof(int) * size);
 
-    // Criar uma lista no array;
-    for (i = 1; i < size + 1; i++)
-    {
+    for (i = 1; i < size + 1; i++) {
         array[i - 1] = i;
     }
 
-    for (i = 0; i < turnos; i++)
-    {
-        // Pegar quantas trocas é para fazer
+    for (i = 0; i < turnos; i++) {
         scanf("%d", &trocas);
 
-        j = 0; // Enquando j não chegar a quantidade de trocas fica rodando.
+        j = 0;
 
-        while (j < trocas && trocou)
-        {
+        while (j < trocas && trocou) {
 
             trocou = 0;
-            // Se K estivel valendo 0 ele volta para o final do array.
-            if (k == 0)
-            {
+            if (k == 0) {
                 k = size - 1;
             }
 
-            if (turnos == 1 && trocas == 1)
-            {
+            if (turnos == 1 && trocas == 1) {
                 temp = array[0];
                 array[0] = array[1];
                 array[1] = temp;
                 j++;
                 trocou = 1;
-            }
-            else if (array[k] > array[k - 1])
-            {
+            } else if (array[k] > array[k - 1]) {
                 temp = array[k];
                 array[k] = array[k - 1];
                 array[k - 1] = temp;
@@ -106,15 +94,11 @@ void bubbleEstranho(int size, int turnos)
         }
     }
 
-    for (i = 0; i < size; i++)
-    {
+    for (i = 0; i < size; i++) {
 
-        if (i == (size - 1))
-        {
+        if (i == (size - 1)) {
             printf("%d", array[i]);
-        }
-        else
-        {
+        } else {
             printf("%d ", array[i]);
         }
     }
