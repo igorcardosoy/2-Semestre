@@ -5,24 +5,24 @@ import java.util.List;
 
 public class EquipComposto extends EquipamentoEletronico{
 
-    List<EquipamentoEletronico> composição;
+    List<EquipamentoEletronico> composicao;
 
     public EquipComposto(String descricao) {
         setDescricao(descricao);
-        composição = new ArrayList<>(5);
+        composicao = new ArrayList<>(5);
     }
 
     public void inserirParte(EquipamentoEletronico equip){
-        composição.add(equip);
+        composicao.add(equip);
     }
 
     @Override
     public double getPreco() {
         double precoTotal = 0;
 
-        for (int i = 0; i < composição.size(); i++) {
-            precoTotal += composição.get(i).getPreco();
-        }
+      for (EquipamentoEletronico equipamentoEletronico : composicao) {
+        precoTotal += equipamentoEletronico.getPreco();
+      }
 
         return precoTotal;
     }
